@@ -4,6 +4,7 @@
   "main": "build/index.js",
   "private": true,
   "dependencies": {
+    "joi": "^14.3.1",
     "webpack": "4.39.1"
   },
   "devDependencies": {
@@ -35,12 +36,13 @@
     "lint-staged": "^9.2.1",
     "prettier": "^1.18.2",
     "pretty-quick": "^1.11.1",
+    "supertest": "^4.0.2",
     "webpack-cli": "^3.3.6"
   },
   "scripts": {
     "start": "webpack --watch",
     "build": "webpack",
-    "test": "npm test",
+    "test": "jest",
     "test:coverage": "npm test -- --coverage",
     "lint": "./node_modules/.bin/eslint src/ ",
     "prepare": "npm run build"
