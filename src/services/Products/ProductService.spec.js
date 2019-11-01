@@ -28,8 +28,14 @@ describe("Testing Products API", () => {
     if (error) throw new Error(`Schema Error: ${error.message}`)
   })
 
-  it("should service call match list schema", async () => {
+  it("should service getAll match list schema", async () => {
     const body = await productService.getAll()
+    const { error } = ProductListSchema.validate(body)
+    if (error) throw new Error(`Schema Error: ${error.message}`)
+  })
+
+  it("should service call match list schema", async () => {
+    const body = await productService.getAllByFilter("id=1")
     const { error } = ProductListSchema.validate(body)
     if (error) throw new Error(`Schema Error: ${error.message}`)
   })
