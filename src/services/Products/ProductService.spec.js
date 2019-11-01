@@ -1,14 +1,15 @@
-// import joi from "joi"
 import request from "supertest"
+import { APIBaseURL } from "../../configs/APIBaseUrl"
+import { ProductListSchema, ProductSchema } from "../../schemas/products.schema"
 
-const api = request("https://my-json-server.typicode.com/eduk29/ecommerce/")
+const api = request(APIBaseURL)
 
-describe("Testing Product API", () => {
-  it("Return 200", () => {
+describe("Testing Products API", () => {
+  it("should return 200", () => {
     api.get("/products").expect(200)
   })
 
-  it("Returns an Array", () => {
+  it("should return an array", () => {
     api
       .get("/products")
       .expect(200)
@@ -17,25 +18,15 @@ describe("Testing Product API", () => {
       })
   })
 
-  // it('Returns at least 1 item', () => {
-  //     return api.get('/products', async (req, res, next) => {
-  //         const { body } = res;
-  //         const productSchema = joi.object().keys({
-  //             id: joi.number().integer().required(),
-  //             name: joi.string().required(),
-  //             description: joi.string().required(),
-  //             price: joi.string().required(),
-  //             url: joi.string().required(),
-  //             stock: joi.number().integer().required(),
-  //             brandId: joi.number().integer().required(),
-  //             categoryId: joi.number().integer().required()
-  //         })
+  it("should match list schema", async () => {
+    const { body } = await api.get("/products").expect(200)
+    const { error } = ProductListSchema.validate(body)
+    if (error) throw new Error(`Schema Error: ${error.message}`)
+  })
 
-  //         const result = Joi.validate(body, productSchema);
-
-  //         const { value, error} = result;
-  //         await console.log(value);
-  //         return result
-  //     })
-  // })
+  it("should match schema", async () => {
+    const { body } = await api.get("/products/1").expect(200)
+    const { error } = ProductSchema.validate(body)
+    if (error) throw new Error(`Schema Error: ${error.message}`)
+  })
 })

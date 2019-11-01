@@ -4,6 +4,7 @@
   "main": "build/index.js",
   "private": true,
   "dependencies": {
+    "@babel/runtime": "^7.6.3",
     "joi": "^14.3.1",
     "webpack": "4.39.1"
   },
@@ -12,6 +13,7 @@
     "@babel/core": "^7.5.5",
     "@babel/node": "^7.5.5",
     "@babel/plugin-proposal-class-properties": "^7.5.5",
+    "@babel/plugin-transform-runtime": "^7.6.2",
     "@babel/preset-env": "^7.5.5",
     "@babel/preset-react": "^7.0.0",
     "@babel/register": "^7.5.5",
