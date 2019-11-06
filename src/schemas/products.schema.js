@@ -1,6 +1,6 @@
 import joi from "joi"
 
-export const productSchema = joi.object().keys({
+const ProductSchema = joi.object().keys({
   id: joi
     .number()
     .integer()
@@ -8,7 +8,7 @@ export const productSchema = joi.object().keys({
   name: joi.string().required(),
   description: joi.string().required(),
   price: joi.string().required(),
-  url: joi.string().required(),
+  urlImage: joi.string().required(),
   stock: joi
     .number()
     .integer()
@@ -22,3 +22,7 @@ export const productSchema = joi.object().keys({
     .integer()
     .required(),
 })
+
+const ProductListSchema = joi.array().items(ProductSchema)
+
+export { ProductListSchema, ProductSchema }
